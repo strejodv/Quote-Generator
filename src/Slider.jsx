@@ -10,7 +10,7 @@ function getQuote(quote){
 function Slider () {
 
     const [quote, setQuote] = useState ([
-            "The only limit to our realization of tomorrow is our doubts of today. - Franklin D. Roosevelt",
+            "The only limit to our realization of tomorrow is our doubts of today.' - Franklin D. Roosevelt",
             "In the end, we will remember not the words of our enemies, but the silence of our friends. - Martin Luther King Jr.",
             "The purpose of our lives is to be happy. - Dalai Lama",
             "Life is what happens when you're busy making other plans. - John Lennon",
@@ -31,7 +31,7 @@ function Slider () {
                 <h1>Quote Slider</h1>
                 <h2>Press the button to get more quotes!</h2>
                 <p>{randomQuote}</p>
-                <button onClick={handleGetQuote}>Get Inspiration</button>
+                <button onClick={handleGetQuote}>Go!</button>
             </div>
         </div>
         </>
