@@ -29,9 +29,9 @@ function Slider () {
         <div className="box">
             <div className="actualSlider">
                 <h1>Quote Slider</h1>
-                <h2>Press the button to get more quotes!</h2>
+                <h2>Press the button to get your daily quote!</h2>
                 <p>{randomQuote}</p>
-                <button onClick={handleGetQuote}>Go!</button>
+                <button onClick={handleGetQuote}>Get quote!</button>
             </div>
         </div>
         </>
