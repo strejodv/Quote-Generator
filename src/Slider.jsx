@@ -1,28 +1,31 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 
 
-function getQuote(quote){
-    const randomIndex = Math.floor(Math.random() * quote.length);
-    return quote[randomIndex];
-}
+
 
 function Slider () {
 
-    const [quote, setQuote] = useState ([
-            "The only limit to our realization of tomorrow is our doubts of today.' - Franklin D. Roosevelt",
-            "In the end, we will remember not the words of our enemies, but the silence of our friends. - Martin Luther King Jr.",
-            "The purpose of our lives is to be happy. - Dalai Lama",
-            "Life is what happens when you're busy making other plans. - John Lennon",
-            "The best way to predict the future is to invent it. - Alan Kay"
-          ]); 
-    
-    
-    const [randomQuote, setRandomQuote] = useState(getQuote(quote));
-    
+    const [quote, setQuote] = useState('Good Day!');
+
+    const fetchQuote = async () => {
+
+        try {
+            const response = await fetch ('https://goquotes-api.herokuapp.com/api/v1/random?count=/random');
+            const data = await response.json();
+            setQuote(data.content);
+        }   catch (error) {
+            console.error('Error fetching the quote:', error);
+        }   
+    };
+
+    useEffect(() => {
+        fetchQuote(); 
+        }, []);
+
     const handleGetQuote = () => {
-        setRandomQuote(getQuote(quote));
-    }; 
+            fetchQuote(); 
+            };    
 
     return (
         <>
@@ -30,7 +33,7 @@ function Slider () {
             <div className="actualSlider">
                 <h1>Quote Slider</h1>
                 <h2>Press the button to get your daily quote!</h2>
-                <p>{randomQuote}</p>
+                <p>{quote}</p>
                 <button onClick={handleGetQuote}>Get quote!</button>
             </div>
         </div>
@@ -38,4 +41,4 @@ function Slider () {
     )
 }
 
-export default Slider
+export default Slider;
