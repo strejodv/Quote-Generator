@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-
-
-
-
 function Slider () {
 
     const [quote, setQuote] = useState('Good Day!');
+    const [quotes, setQuotes] = useState([]);
 
     const fetchQuote = async () => {
 
         try {
-            const response = await fetch ('https://goquotes-api.herokuapp.com/api/v1/random?count=/random');
+            const response = await fetch ('https://type.fit/api/quotes');
             const data = await response.json();
-            setQuote(data.content);
+            setQuotes(data);
+            setQuote(data[Math.floor(Math.random() * data.length)].text);
         }   catch (error) {
             console.error('Error fetching the quote:', error);
         }   
@@ -24,8 +22,11 @@ function Slider () {
         }, []);
 
     const handleGetQuote = () => {
-            fetchQuote(); 
-            };    
+        if (quotes.length > 0) {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            setQuote(quotes[randomIndex].text);
+            }
+        };    
 
     return (
         <>
@@ -34,7 +35,7 @@ function Slider () {
                 <h1>Quote Slider</h1>
                 <h2>Press the button to get your daily quote!</h2>
                 <p>{quote}</p>
-                <button onClick={handleGetQuote}>Get quote!</button>
+                <button onClick={handleGetQuote}>Get Inspiration!</button>
             </div>
         </div>
         </>
@@ -42,3 +43,4 @@ function Slider () {
 }
 
 export default Slider;
+
